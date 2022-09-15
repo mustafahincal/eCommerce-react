@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ListGroup from "react-bootstrap/ListGroup";
-import { getCategories } from "../services/categoryService";
+import { getCategories } from "../../services/categoryService";
+import styles from "./styles.module.css";
 
 function Categories() {
   const [categories, setCategories] = useState([]);
@@ -8,13 +8,13 @@ function Categories() {
     getCategories().then((result) => setCategories(result.data));
   }, []);
   return (
-    <ListGroup as="ul">
+    <ul className={styles.list}>
       {categories.map((category) => (
-        <ListGroup.Item as="li" key={category.categoryId} className="">
+        <li key={category.categoryId} className={styles.listItem}>
           {category.categoryName}
-        </ListGroup.Item>
+        </li>
       ))}
-    </ListGroup>
+    </ul>
   );
 }
 

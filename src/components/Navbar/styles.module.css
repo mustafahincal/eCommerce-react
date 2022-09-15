@@ -1,0 +1,36 @@
+.nav {
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.navBorder {
+  border-bottom: solid 2px #e2e8f0;
+}
+
+.nav .left {
+  display: flex;
+}
+
+.nav .left .menu {
+  display: flex;
+  margin-left: 40px;
+}
+
+.nav .left .menu li a {
+  color: #4a5568;
+  font-size: 1.1rem;
+  padding: 0px 16px;
+  display: block;
+  font-size: 16px;
+}
+
+.nav .left .menu li a:hover {
+  color: #000;
+}
+
+.nav .right a:nth-child(odd) {
+  margin: 0px 10px;
+}

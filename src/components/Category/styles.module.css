@@ -1,0 +1,15 @@
+.list {
+  display: flex;
+  flex-direction: column;
+}
+.listItem {
+  padding: 7px 12px;
+  border: solid 1px #e2e8f0;
+  cursor: pointer;
+}
+.listItem:hover {
+  background-color: #e2e8f0;
+}
+.listItem.activeLink {
+  background-color: #e2e8f0;
+}
