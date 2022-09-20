@@ -1,4 +1,7 @@
-import { get, post } from "./request";
-const url = "http://localhost:8080/api";
+import axios from "axios";
+const url = "http://localhost:8080/api/categories";
 
-export const getCategories = () => get(url + "/categories/getall");
+export const getCategories = async () => {
+  const { data } = await axios.get(url + "/getall");
+  return data.data;
+};

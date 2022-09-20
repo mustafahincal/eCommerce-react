@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { getCategories } from "../../services/categoryService";
 import styles from "./styles.module.css";
+import { useQuery } from "@tanstack/react-query";
 
 function Categories() {
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    getCategories().then((result) => setCategories(result.data));
-  }, []);
+  const { isLoading, error, data } = useQuery(["categories"], () =>
+    getCategories()
+  );
+
+  if (isLoading) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
   return (
     <ul className={styles.list}>
-      {categories.map((category) => (
+      {data.map((category) => (
         <li key={category.categoryId} className={styles.listItem}>
           {category.categoryName}
         </li>

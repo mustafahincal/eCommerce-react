@@ -1,12 +1,8 @@
 import axios from "axios";
 
-const getRequest = (url) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(url)
-      .then((response) => resolve(response.data))
-      .catch((error) => reject(error));
-  });
+const getRequest = async (url) => {
+  const { data } = await axios.get(url);
+  return data.data;
 };
 
 const postRequest = (url, data) => {

@@ -1,5 +1,7 @@
 import axios from "axios";
-import { get, post } from "./request";
-const url = "http://localhost:8080/api";
+const url = "http://localhost:8080/api/products";
 
-export const getProducts = () => get(url + "/products/getall");
+export const getProducts = async () => {
+  const { data } = await axios.get(url + "/getall");
+  return data.data;
+};
