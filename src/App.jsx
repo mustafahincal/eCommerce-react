@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
 import { extendTheme } from "@chakra-ui/react";
-import Main from "./components/Product/Main";
+import Main from "./components/Main/Main";
 import Home from "./pages/Home/Home";
 import SignIn from "./pages/Auth/SignIn";
 import SignUp from "./pages/Auth/SignUp";
