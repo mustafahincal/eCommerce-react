@@ -9,7 +9,7 @@ function Navbar() {
     <div className={styles.navBorder}>
       <nav className={styles.nav + " container"}>
         <div className={styles.left}>
-          <Link to={"/"} className="logo">
+          <Link to={"/"} className={styles.logo}>
             eCommerce
           </Link>
 

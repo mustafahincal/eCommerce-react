@@ -2,7 +2,6 @@
   padding: 12px 20px;
   display: flex;
   justify-content: space-between;
-
   align-items: center;
 }
 
@@ -16,15 +15,15 @@
 
 .nav .left .menu {
   display: flex;
+  align-items: center;
   margin-left: 40px;
 }
 
 .nav .left .menu li a {
   color: #4a5568;
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding: 0px 16px;
   display: block;
-  font-size: 16px;
 }
 
 .nav .left .menu li a:hover {
@@ -33,4 +32,9 @@
 
 .nav .right a:nth-child(odd) {
   margin: 0px 10px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
 }

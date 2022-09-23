@@ -3,7 +3,7 @@ import { Box, Image, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-function Card({ item }) {
+function Product({ item }) {
   return (
     <Box
       borderWidth="1px"
@@ -13,7 +13,7 @@ function Card({ item }) {
       maxW="sm"
       mb={"3"}
     >
-      <Link to={"#/"}>
+      <Link to={`/products/${item.productId}`}>
         <Image
           src="https://picsum.photos/500"
           alt="product"
@@ -41,4 +41,4 @@ function Card({ item }) {
   );
 }
 
-export default Card;
+export default Product;

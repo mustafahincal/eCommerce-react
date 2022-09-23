@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:8080/api/categories";
+const url = process.env.REACT_APP_BASE_ENDPOINT + "/categories";
 
 export const getCategories = async () => {
   const { data } = await axios.get(url + "/getall");
