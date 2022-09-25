@@ -18,10 +18,7 @@ function ProductList() {
     status,
   } = useInfiniteQuery(["projects"], getProductsByPageNo, {
     getNextPageParam: (lastGroup, allGroups) => {
-      console.log("lastgrop", lastGroup);
-      console.log("allgroups", allGroups);
-
-      const morePagesExits = lastGroup?.length === 10;
+      const morePagesExits = lastGroup?.length === 12;
       if (!morePagesExits) return;
       return allGroups.length + 1;
     },
@@ -30,10 +27,9 @@ function ProductList() {
   if (status === "loading") return "Loading...";
 
   if (status === "error") return "An error has occurred: " + error.message;
-  console.log("data", data);
   return (
     <div>
-      <Grid templateColumns={"repeat(3,1fr)"} gap="4">
+      <Grid templateColumns={"repeat(4,1fr)"} gap="4">
         {data.pages.map((group, i) => (
           <React.Fragment key={i}>
             {group.map((item) => (

@@ -8,22 +8,15 @@ import ProductDetail from "../../pages/ProductDetail/ProductDetail";
 function Main() {
   return (
     <div>
-      <Grid templateColumns="repeat(10, 1fr)" gap={5}>
-        <GridItem colSpan={2}>
-          <Categories />
-        </GridItem>
-        <GridItem colSpan={8}>
-          <Routes>
-            <Route path="/" element={<ProductList />} />
-            <Route path="/products" element={<ProductList />} />
+      <Routes>
+        <Route path="/" element={<ProductList />} />
+        <Route path="/products" element={<ProductList />} />
 
-            <Route
-              path="/products/category/:categoryId"
-              element={<ProductList />}
-            />
-          </Routes>
-        </GridItem>
-      </Grid>
+        <Route
+          path="/products/category/:categoryId"
+          element={<ProductList />}
+        />
+      </Routes>
     </div>
   );
 }
