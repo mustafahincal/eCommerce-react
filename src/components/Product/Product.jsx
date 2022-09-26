@@ -2,8 +2,13 @@ import React from "react";
 import { Box, Image, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { useCartContext } from "../../contexts/CartContext";
 
 function Product({ item }) {
+  const { addToCart, removeFromCart, cartItems } = useCartContext();
+  const findCartItem = cartItems.find(
+    (cartItem) => cartItem.productId == item.productId
+  );
   return (
     <Box
       borderWidth="1px"
@@ -35,7 +40,15 @@ function Product({ item }) {
         </Box>
       </Link>
       <Box px={"6"} pb="3">
-        <Button colorScheme={"blue"}>Add To Cart</Button>
+        {findCartItem ? (
+          <Button colorScheme={"red"} onClick={() => removeFromCart(item)}>
+            Remove From Cart
+          </Button>
+        ) : (
+          <Button colorScheme={"green"} onClick={() => addToCart(item)}>
+            Add To Cart
+          </Button>
+        )}
       </Box>
     </Box>
   );

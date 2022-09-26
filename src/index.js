@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./contexts/AuthContext";
+import { CartProvider } from "./contexts/CartContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,9 +21,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <CartProvider>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </CartProvider>
     </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>

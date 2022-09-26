@@ -10,7 +10,6 @@ import {
 import React from "react";
 import { useFormik } from "formik";
 import RegisterSchema from "../../validations/registerSchema";
-import { register } from "../../services/authService";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +17,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 
 function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
-  const { setIsLogged, setUser } = useAuthContext();
+  const { setIsLogged, setUser, register } = useAuthContext();
 
   const navigate = useNavigate();
   const formik = useFormik({
@@ -36,24 +35,7 @@ function SignUp() {
         password: values.password,
         firstName: values.firstName,
         lastName: values.lastName,
-      })
-        .then((result) => {
-          if (result.success) {
-            toast.success(result.message);
-            localStorage.setItem("userInfo", JSON.stringify(result.data));
-            setUser(result.data);
-            setIsLogged(true);
-            navigate("/main");
-            setIsLoading(false);
-          } else {
-            toast.error(result.message);
-            setIsLoading(false);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          setIsLoading(false);
-        });
+      });
     },
     validationSchema: RegisterSchema,
   });

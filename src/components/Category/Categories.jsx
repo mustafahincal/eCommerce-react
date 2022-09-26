@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getCategories } from "../../services/categoryService";
+import { fetchCategories, getCategories } from "../../services/categoryService";
 import styles from "./styles.module.css";
 import { useQuery } from "@tanstack/react-query";
 
 function Categories() {
   const { isLoading, error, data } = useQuery(["categories"], () =>
-    getCategories()
+    fetchCategories()
   );
 
   if (isLoading) return "Loading...";

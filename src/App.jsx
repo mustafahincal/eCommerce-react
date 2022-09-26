@@ -12,6 +12,7 @@ import SignUp from "./pages/Auth/SignUp";
 import { ToastContainer } from "react-toastify";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Profile from "./pages/Profile/Profile";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 const theme = extendTheme({
   fonts: {
@@ -34,7 +35,7 @@ function App() {
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/products/:productId" element={<ProductDetail />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile" element={<ProtectedRoute />} />
             </Routes>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import { Flex, Spinner } from "@chakra-ui/react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { fetchLogin, fetchRegister } from "../services/authService";
 
 const AuthContext = createContext();
 
@@ -16,8 +18,28 @@ export const AuthProvider = ({ children }) => {
       setUser(JSON.parse(localStorage.getItem("userInfo")));
       setIsLogged(true);
       setIsLoading(false);
+    } else {
+      setIsLoading(false);
     }
   }, []);
+
+  const register = (values) => {
+    fetchRegister(values)
+      .then((result) => {
+        if (result.success) {
+          toast.success(result.message);
+          localStorage.setItem("userInfo", JSON.stringify(result.data));
+          setUser(result.data);
+          setIsLogged(true);
+          navigate("/main");
+        } else {
+          toast.error(result.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const logout = () => {
     setIsLogged(false);
@@ -25,6 +47,24 @@ export const AuthProvider = ({ children }) => {
     setIsAdmin(false);
     localStorage.removeItem("userInfo");
     navigate("/");
+  };
+
+  const login = (values) => {
+    fetchLogin(values)
+      .then((result) => {
+        if (result.success) {
+          toast.success(result.message);
+          localStorage.setItem("userInfo", JSON.stringify(result.data));
+          setUser(result.data);
+          setIsLogged(true);
+          navigate("/main");
+        } else {
+          toast.error(result.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const values = {
@@ -35,6 +75,8 @@ export const AuthProvider = ({ children }) => {
     user,
     setUser,
     logout,
+    login,
+    register,
   };
 
   if (isLoading) {
