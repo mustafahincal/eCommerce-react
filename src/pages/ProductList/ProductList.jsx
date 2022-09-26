@@ -1,10 +1,7 @@
 import { Box, Button, Flex, Grid } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Product from "../../components/Product/Product";
-import {
-  getProducts,
-  getProductsByPageNo,
-} from "../../services/productService";
+import { fetchProductsByPageNo } from "../../services/productService";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 function ProductList() {
@@ -16,7 +13,7 @@ function ProductList() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery(["projects"], getProductsByPageNo, {
+  } = useInfiniteQuery(["projects"], fetchProductsByPageNo, {
     getNextPageParam: (lastGroup, allGroups) => {
       const morePagesExits = lastGroup?.length === 12;
       if (!morePagesExits) return;

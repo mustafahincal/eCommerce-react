@@ -2,11 +2,13 @@ import { Box, Button, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../../services/productService";
+import { fetchProductById } from "../../services/productService";
 import ImageGallery from "react-image-gallery";
+import { useCartContext } from "../../contexts/CartContext";
 
 function ProductDetail() {
   const { productId } = useParams();
+  const { addToCart, cartItems, removeFromCart } = useCartContext();
   const images = [
     {
       original: "https://picsum.photos/id/1018/1000/600/",
@@ -23,17 +25,26 @@ function ProductDetail() {
   ];
 
   const { isLoading, error, data } = useQuery(["product", productId], () =>
-    getProductById(productId)
+    fetchProductById(productId)
   );
 
   if (isLoading) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 
-  console.log(data);
+  const findCartItem = cartItems.find((item) => item.productId == productId);
+
   return (
     <div>
-      <Button colorScheme={"blue"}> Add To Cart</Button>
+      {findCartItem ? (
+        <Button colorScheme={"red"} onClick={() => removeFromCart(data)}>
+          Remove From Cart
+        </Button>
+      ) : (
+        <Button colorScheme={"green"} onClick={() => addToCart(data)}>
+          Add To Cart
+        </Button>
+      )}
 
       <Text py={"0"} fontSize="3xl" fontWeight={"bold"} mt="15">
         {data.productName}
