@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Grid } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Spinner } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Product from "../../components/Product/Product";
 import { fetchProductsByPageNo } from "../../services/productService";
@@ -21,7 +21,18 @@ function ProductList() {
     },
   });
 
-  if (status === "loading") return "Loading...";
+  if (status === "loading")
+    return (
+      <Flex justifyContent={"center"} alignItems="center" height={"100vh"}>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          size="xl"
+          color="red"
+        />
+      </Flex>
+    );
 
   if (status === "error") return "An error has occurred: " + error.message;
   return (

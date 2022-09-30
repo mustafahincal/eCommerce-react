@@ -3,6 +3,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { fetchLogin, fetchRegister } from "../services/authService";
+import jwt_decode from "jwt-decode";
+import { fetchUserById } from "../services/userService";
 
 const AuthContext = createContext();
 
@@ -14,7 +16,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("userInfo")) {
+    if (localStorage.getItem("token")) {
       setUser(JSON.parse(localStorage.getItem("userInfo")));
       setIsLogged(true);
       setIsLoading(false);
@@ -46,24 +48,44 @@ export const AuthProvider = ({ children }) => {
     setUser({});
     setIsAdmin(false);
     localStorage.removeItem("userInfo");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
     navigate("/");
   };
 
   const login = (values) => {
+    setIsLoading(true);
     fetchLogin(values)
       .then((result) => {
         if (result.success) {
           toast.success(result.message);
-          localStorage.setItem("userInfo", JSON.stringify(result.data));
-          setUser(result.data);
+          localStorage.setItem("token", result.data);
+          jwtDecode(result.data);
           setIsLogged(true);
           navigate("/main");
         } else {
           toast.error(result.message);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
         console.log(err);
+        setIsLoading(false);
+      });
+  };
+
+  const jwtDecode = async (token) => {
+    const decoded = jwt_decode(token);
+    localStorage.setItem("userId", decoded.sub);
+    fetchUserById(decoded.sub)
+      .then((result) => {
+        setUser(result.data);
+        localStorage.setItem("userInfo", JSON.stringify(result.data));
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
       });
   };
 

@@ -25,7 +25,6 @@ function SignIn() {
       password: "",
     },
     onSubmit: async (values, bag) => {
-      setIsLoading(true);
       login(values);
     },
   });

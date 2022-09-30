@@ -38,11 +38,22 @@ function CartSummary() {
           py={5}
           border="1px"
           borderColor={"gray.300"}
+          backgroundColor={"green.300"}
+          color={"white"}
+          textAlign={"center"}
+          _hover={{
+            background: "green.400",
+          }}
+          fontSize="20px"
+          fontWeight="bold"
         >
-          <NavLink to="/cart" textAlign={"center"} style={{ width: "100%" }}>
-            <Button w={"full"} colorScheme={"blue"}>
-              Your Cart
-            </Button>
+          <NavLink
+            to="/cart"
+            style={{
+              width: "100%",
+            }}
+          >
+            Your Cart
           </NavLink>
         </MenuItem>
       </MenuList>

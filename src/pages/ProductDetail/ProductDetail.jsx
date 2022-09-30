@@ -1,6 +1,6 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Spinner, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchProductById } from "../../services/productService";
 import ImageGallery from "react-image-gallery";
@@ -28,7 +28,18 @@ function ProductDetail() {
     fetchProductById(productId)
   );
 
-  if (isLoading) return "Loading...";
+  if (isLoading)
+    return (
+      <Flex justifyContent={"center"} alignItems="center" height={"100vh"}>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          size="xl"
+          color="red"
+        />
+      </Flex>
+    );
 
   if (error) return "An error has occurred: " + error.message;
 
