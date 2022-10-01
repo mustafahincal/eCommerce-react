@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Categories from "../Category/Categories";
 import ProductList from "../../pages/ProductList/ProductList";
 import ProductDetail from "../../pages/ProductDetail/ProductDetail";
+import Error404 from "../../pages/Error404/Error404";
 
 function Main() {
   return (
@@ -16,6 +17,7 @@ function Main() {
           path="/products/category/:categoryId"
           element={<ProductList />}
         />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
   );

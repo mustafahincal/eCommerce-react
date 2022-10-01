@@ -13,6 +13,9 @@ import { ToastContainer } from "react-toastify";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Profile from "./pages/Profile/Profile";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import Cart from "./pages/Cart/Cart";
+import Error404 from "./pages/Error404/Error404";
+import CartPurchased from "./pages/CartPurchased/CartPurchased";
 
 const theme = extendTheme({
   fonts: {
@@ -36,6 +39,9 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/products/:productId" element={<ProductDetail />} />
               <Route path="/profile" element={<ProtectedRoute />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/cartpurchased" element={<CartPurchased />} />
+              <Route path="*" element={<Error404 />} />
             </Routes>
           </div>
         </div>
