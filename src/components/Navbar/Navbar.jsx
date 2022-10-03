@@ -6,7 +6,7 @@ import CartSummary from "../CartSummary/CartSummary";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 function Navbar() {
-  const { isLogged, user, logout } = useAuthContext();
+  const { isLogged, user, logout, isAdmin } = useAuthContext();
 
   return (
     <div className={styles.navBorder}>
@@ -22,16 +22,17 @@ function Navbar() {
             </li>
           </ul>
         </div>
+
         <div className={styles.right}>
           {!isLogged ? (
             <>
-              <Link to={"signin"}>
+              <Link to="/signin">
                 <Button colorScheme="blue" size="md">
                   Login
                 </Button>
               </Link>
 
-              <Link to={"signup"}>
+              <Link to="/signup">
                 <Button colorScheme="blue" size="md">
                   Register
                 </Button>
@@ -39,11 +40,18 @@ function Navbar() {
             </>
           ) : (
             <>
+              {isAdmin && (
+                <Link to="/admin">
+                  <Button colorScheme="pink" variant="outline">
+                    Admin
+                  </Button>
+                </Link>
+              )}
               <CartSummary />
-              <NavLink to={"/profile"}>
+              <NavLink to="/profile">
                 <Button>{user.firstName + " " + user.lastName}</Button>
               </NavLink>
-              <Button onClick={logout} colorScheme="red">
+              <Button onClick={logout} colorScheme="red" ml={"3"}>
                 Log out
               </Button>
             </>

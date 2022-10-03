@@ -16,6 +16,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Cart from "./pages/Cart/Cart";
 import Error404 from "./pages/Error404/Error404";
 import CartPurchased from "./pages/CartPurchased/CartPurchased";
+import Admin from "./pages/Admin/Admin";
 
 const theme = extendTheme({
   fonts: {
@@ -38,7 +39,14 @@ function App() {
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/products/:productId" element={<ProductDetail />} />
-              <Route path="/profile" element={<ProtectedRoute />} />
+              <Route
+                path="/profile"
+                element={<ProtectedRoute component={Profile} />}
+              />
+              <Route
+                path="/admin/*"
+                element={<ProtectedRoute component={Admin} />}
+              />
               <Route path="/cart" element={<Cart />} />
               <Route path="/cartpurchased" element={<CartPurchased />} />
               <Route path="*" element={<Error404 />} />

@@ -20,22 +20,27 @@ export const AuthProvider = ({ children }) => {
       setUser(JSON.parse(localStorage.getItem("userInfo")));
       setIsLogged(true);
       setIsLoading(false);
+    }
+    if (localStorage.getItem("admin")) {
+      setIsAdmin(true);
     } else {
       setIsLoading(false);
     }
   }, []);
 
   const register = (values) => {
+    setIsLoading(true);
     fetchRegister(values)
       .then((result) => {
         if (result.success) {
           toast.success(result.message);
-          localStorage.setItem("userInfo", JSON.stringify(result.data));
-          setUser(result.data);
+          localStorage.setItem("token", result.data);
+          jwtDecode(result.data);
           setIsLogged(true);
           navigate("/main");
         } else {
           toast.error(result.message);
+          setIsLoading(false);
         }
       })
       .catch((err) => {
@@ -50,6 +55,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
+    localStorage.removeItem("admin");
     navigate("/");
   };
 
@@ -79,6 +85,10 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("userId", decoded.sub);
     fetchUserById(decoded.sub)
       .then((result) => {
+        if (result.data.role === "admin") {
+          setIsAdmin(true);
+          localStorage.setItem("admin", JSON.stringify(true));
+        }
         setUser(result.data);
         localStorage.setItem("userInfo", JSON.stringify(result.data));
         setIsLoading(false);

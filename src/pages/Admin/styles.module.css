@@ -1,0 +1,17 @@
+.adminMenu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.menuItem {
+  padding: 7px 12px;
+  border: solid 1px #e2e8f0;
+  cursor: pointer;
+  width: 100%;
+}
+.menuItem:hover {
+  background-color: #e2e8f0;
+}
+.menuItem.activeLink {
+  background-color: #e2e8f0;
+}

@@ -3,11 +3,11 @@ import { Navigate, Route } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import Profile from "./Profile/Profile";
 
-function ProtectedRoute({ component, ...rest }) {
+function ProtectedRoute({ component: Component }) {
   const { isLogged } = useAuthContext();
 
   if (isLogged) {
-    return <Profile />;
+    return <Component />;
   } else {
     return <Navigate to={"/signin"} />;
   }
