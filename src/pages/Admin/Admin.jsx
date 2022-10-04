@@ -15,13 +15,11 @@ function Admin() {
             <NavLink className={styles.menuItem} to="home">
               Home
             </NavLink>
-
-            <NavLink className={styles.menuItem} to="orders">
-              Orders
-            </NavLink>
-
             <NavLink className={styles.menuItem} to="products">
               Products
+            </NavLink>
+            <NavLink className={styles.menuItem} to="orders">
+              Orders
             </NavLink>
           </ul>
         </GridItem>

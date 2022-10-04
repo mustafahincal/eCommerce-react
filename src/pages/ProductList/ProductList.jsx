@@ -13,7 +13,7 @@ function ProductList() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery(["projects"], fetchProductsByPageNo, {
+  } = useInfiniteQuery(["products"], fetchProductsByPageNo, {
     getNextPageParam: (lastGroup, allGroups) => {
       const morePagesExits = lastGroup?.length === 12;
       if (!morePagesExits) return;
