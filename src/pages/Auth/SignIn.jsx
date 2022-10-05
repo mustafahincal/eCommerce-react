@@ -7,17 +7,12 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
-import { login } from "../../services/authService";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 function SignIn() {
-  const [isLoading, setIsLoading] = useState(false);
-  const { setIsLogged, setUser, login } = useAuthContext();
-  const navigate = useNavigate();
+  const { login } = useAuthContext();
 
   const formik = useFormik({
     initialValues: {
@@ -59,7 +54,7 @@ function SignIn() {
                   isInvalid={formik.errors.password && formik.touched.password}
                 />
               </FormControl>
-              <Button mt="4" width={"full"} type="submit" isLoading={isLoading}>
+              <Button mt="4" width={"full"} type="submit">
                 Sign In
               </Button>
             </form>

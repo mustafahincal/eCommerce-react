@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { fetchLogin, fetchRegister } from "../services/authService";
 import jwt_decode from "jwt-decode";
 import { fetchUserById } from "../services/userService";
+import Loading from "../components/Loading/Loading";
 
 const AuthContext = createContext();
 
@@ -32,10 +33,12 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     fetchRegister(values)
       .then((result) => {
+        console.log(result);
         if (result.success) {
           toast.success(result.message);
-          localStorage.setItem("token", result.data);
-          jwtDecode(result.data);
+          localStorage.setItem("token", result.data.token);
+          localStorage.setItem("refreshToken", result.data.refreshToken);
+          jwtDecode(result.data.token);
           setIsLogged(true);
           navigate("/main");
         } else {
@@ -56,6 +59,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("userId");
     localStorage.removeItem("token");
     localStorage.removeItem("admin");
+    localStorage.removeItem("refreshToken");
     navigate("/");
   };
 
@@ -65,8 +69,9 @@ export const AuthProvider = ({ children }) => {
       .then((result) => {
         if (result.success) {
           toast.success(result.message);
-          localStorage.setItem("token", result.data);
-          jwtDecode(result.data);
+          localStorage.setItem("token", result.data.token);
+          localStorage.setItem("refreshToken", result.data.refreshToken);
+          jwtDecode(result.data.token);
           setIsLogged(true);
           navigate("/main");
         } else {
@@ -112,17 +117,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   if (isLoading) {
-    return (
-      <Flex justifyContent={"center"} alignItems="center" height={"100vh"}>
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          size="xl"
-          color="red"
-        />
-      </Flex>
-    );
+    return <Loading />;
   }
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
