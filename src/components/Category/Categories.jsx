@@ -2,28 +2,32 @@ import { useEffect, useState } from "react";
 import { fetchCategories, getCategories } from "../../services/categoryService";
 import styles from "./styles.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { Flex, Spinner } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Flex,
+  Spinner,
+} from "@chakra-ui/react";
+import Loading from "../Loading/Loading";
 
 function Categories() {
   const { isLoading, error, data } = useQuery(["categories"], () =>
     fetchCategories()
   );
 
-  if (isLoading)
+  if (isLoading) return <Loading />;
+
+  if (error) {
     return (
-      <Flex justifyContent={"center"} alignItems="center" height={"100vh"}>
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          size="xl"
-          color="red"
-        />
-      </Flex>
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle>An error has occurred</AlertTitle>
+        <AlertDescription>{error.message}</AlertDescription>
+      </Alert>
     );
-
-  if (error) return "An error has occurred: " + error.message;
-
+  }
   return (
     <ul className={styles.list}>
       {data.map((category) => (

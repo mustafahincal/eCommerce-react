@@ -38,9 +38,10 @@ export const AuthProvider = ({ children }) => {
           toast.success(result.message);
           localStorage.setItem("token", result.data.token);
           localStorage.setItem("refreshToken", result.data.refreshToken);
+          localStorage.setItem("currentUserId", result.data.userId);
           jwtDecode(result.data.token);
           setIsLogged(true);
-          navigate("/main");
+          navigate("/");
         } else {
           toast.error(result.message);
           setIsLoading(false);
@@ -71,9 +72,10 @@ export const AuthProvider = ({ children }) => {
           toast.success(result.message);
           localStorage.setItem("token", result.data.token);
           localStorage.setItem("refreshToken", result.data.refreshToken);
+          localStorage.setItem("currentUserId", result.data.userId);
           jwtDecode(result.data.token);
           setIsLogged(true);
-          navigate("/main");
+          navigate("/");
         } else {
           toast.error(result.message);
           setIsLoading(false);

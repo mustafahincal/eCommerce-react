@@ -28,3 +28,19 @@ export const fetchLogin = (userForLogin) => {
   //   .then((result) => console.log(result))
   //   .catch((err) => console.log(err));
 };
+
+export const refreshToken = () => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(url + "/refresh", {
+        userId: localStorage.getItem("currentUserId"),
+        refreshToken: localStorage.getItem("refreshToken"),
+      })
+      .then((response) => resolve(response.data))
+      .catch((error) => reject(error));
+  });
+  // console.log({
+  //   userId: localStorage.getItem("currentUserId"),
+  //   refreshToken: localStorage.getItem("refreshToken"),
+  // });
+};

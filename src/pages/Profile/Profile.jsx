@@ -1,7 +1,12 @@
 import React from "react";
+import Categories from "../../components/Category/Categories";
 
 function Profile() {
-  return <div>Profile</div>;
+  return (
+    <div>
+      <Categories />
+    </div>
+  );
 }
 
 export default Profile;
