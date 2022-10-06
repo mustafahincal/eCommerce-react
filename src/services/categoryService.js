@@ -20,10 +20,10 @@ export const fetchCategories = async () => {
               localStorage.setItem("token", response.data.token);
               localStorage.setItem("refreshToken", response.data.refreshToken);
               localStorage.setItem("currentUserId", response.data.userId);
+              fetchCategories().then((response) => resolve(response));
             })
             .catch((error) => {
-              if (error.response.status === 401) {
-              }
+              console.log(error);
             });
         }
       });

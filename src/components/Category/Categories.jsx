@@ -28,6 +28,7 @@ function Categories() {
       </Alert>
     );
   }
+
   return (
     <ul className={styles.list}>
       {data.map((category) => (
